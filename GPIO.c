@@ -8,74 +8,20 @@
 #include "GPIO.h"
 EXT_INT_HANDLER Interrupt_Callback;
 
-void GPIO_Init(PORT p, uint8_t pins, Direction dir,uint8_t pullup) {
-	switch (p) {
-		case PORTA__:
-	 	if (dir == Output)
-			DDRA |= pins;
-		else {
-			DDRA &= ~(pins);
-			if (pullup == 1)
-				PORTA |= pins; 
-			else
-				PORTA &= ~(pins);
-		}
-		break;
-		
-		case PORTB__:
-	 	if (dir == Output)
-	 		DDRB |= pins;
-	 	else {
-		 	DDRB &= ~(pins);
-		 	if (pullup == 1)
-		 		PORTB |= pins;
-		 	else
-		 		PORTB &= ~(pins);
-	 	}
-	 	break;
-		 
-		case PORTC__:
-	 	if (dir == Output)
-	 		DDRC |= pins;
-	 	else {
-		 	DDRC &= ~(pins);
-		 	if (pullup == 1)
-		 		PORTC |= pins;
-		 	else
-		 		PORTC &= ~(pins);
-	 	}
-	 	break;
-		 
-		case PORTD__:
-	 	if (dir == Output)
-	 		DDRD |= pins;
-	 	else {
-		 	DDRD &= ~(pins);
-		 	if (pullup == 1)
-		 		PORTD |= pins;
-		 	else
-		 		PORTD &= ~(pins);
-	 	}
-	 	break;
+void GPIO_Init(volatile uint8_t* p, uint8_t pins, Direction dir,uint8_t pullup) {
+	 if (dir == Output)
+		*(p-1) |= pins; // PORTX - 1 == DDRX
+	else {
+		*(p-1) &= ~(pins);
+		if (pullup == 1)
+			*p |= pins; 
+		else
+			*p &= ~(pins);
 	}
 }
 
-uint8_t GPIO_Read(PORT p, uint8_t pins) {
-	switch (p) {
-		case PORTA__: 
-			return (PINA & pins); 
-			break;
-		case PORTB__:
-			return (PINB & pins);
-			break;
-		case PORTC__:
-			return (PINC & pins);
-			break;
-		case PORTD__:
-			return (PIND & pins); 
-			break;
-	}
-	return 0;
+uint8_t GPIO_Read(volatile uint8_t* p, uint8_t pins) {
+	return *(p-2)&pins; // PORTX - 2 == PINX
 }
 
 void EnableGlobalPullup() {
@@ -118,6 +64,9 @@ void extInterrupt(EXT_INT_PIN pin, EXT_INT_MODE mode, EXT_INT_HANDLER handler) {
 		}
 		GICR |= (1 << INT1);
 	}	
+	else if (pin == EXT_INT2) {
+		// TODO
+	}
 }
 
 ISR(INT0_vect) {
@@ -125,5 +74,10 @@ ISR(INT0_vect) {
 }
 
 ISR(INT1_vect) {
-	if (Interrupt_Callback) Interrupt_Callback();
+	 // TODO
+}
+
+
+ISR(INT2_vect) {
+	// TODO
 }
