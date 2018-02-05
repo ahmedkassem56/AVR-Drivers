@@ -3,6 +3,8 @@
  *
  *  Created: 1/26/2018 4:16:19 PM
  *  Author: Ahmed Kassem
+ *
+ *  To use float numbers in lcdPrint function (this adds ~2kB of code space) follow this: https://startingelectronics.org/articles/atmel-AVR-8-bit/print-float-atmel-studio-7/
  */ 
 
 

@@ -3,6 +3,8 @@
  *
  *  Created: 1/26/2018 4:16:07 PM
  *  Author: Ahmed Kassem
+ *
+ *  To use float numbers in lcdPrint function (this adds ~2kB of code space) follow this: https://startingelectronics.org/articles/atmel-AVR-8-bit/print-float-atmel-studio-7/
  */ 
 
 #include "LCD.h"
@@ -85,6 +87,7 @@ void lcdSetCursor(uint8_t x,uint8_t y) {
 	lcdCommand(x+y-1);
 		
 }
+
 #ifndef LCD_COMPACT_PRINT
 void lcdPrint(const char *format, ...) {
 	char buffer[256]; // STEP 1: building the string
