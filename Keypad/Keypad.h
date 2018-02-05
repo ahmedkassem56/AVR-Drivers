@@ -4,8 +4,8 @@
  *  Created: 2/4/2018 5:27:21 PM
  *  Author: Ahmed Kassem
  
- *  Note:This library is built for a 4x3 Keypad but can be easily modified to larger scale up to 8x8 by editing ROW_PINS and LINE_PINS in Keypad.c and adding corresponding 
- *  defines for ROWx,LINEx,ROW_MASK and LINE_MASK. No need to edit anything in functions.
+ *  Note:This library is built for a 4x3 Keypad but can be easily modified to larger scale up to 8x8 by editing ROW_PINS and LINE_PINS in Keypad.c, adding corresponding 
+ *  defines for ROWx,LINEx,ROW_MASK,LINE_MASK and editing "keys" array. No need to edit anything in functions.
  */ 
 
 
