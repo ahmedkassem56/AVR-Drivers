@@ -68,6 +68,10 @@ void unregisterADC(CHANNEL ch) {
 	}
 }
 
+void disableADC() {
+	ADCSRA &= ~(1 << ADEN);
+}
+
 ISR(ADC_vect) {
 	uint8_t ch = enabled_channels[index_i];
 	*channels[ch].output = ADCL;
