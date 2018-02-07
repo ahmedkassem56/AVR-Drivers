@@ -46,7 +46,6 @@ typedef enum {
 typedef struct {
 	uint8_t enabled;
 	volatile uint16_t* output;
-	uint8_t order;
 } INT_CHANNEL ;
 
 

@@ -30,7 +30,6 @@ void enableADCInterrupt(PRESCALER p, REF_SEL ref) {
 void registerADC(CHANNEL ch, volatile uint16_t* out) {
 	if (channels[ch].enabled == 0) {
 		enabled_channels[index_register] = ch;
-		channels[ch].order = index_register;
 		channels[ch].enabled = 1;
 		channels[ch].output = out;
 		DDRA &= ~ (1 << ch);
